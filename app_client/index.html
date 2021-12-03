@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP case study 2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="case study #2" />
+        <meta name="author" content="saz" />
+        <link rel="stylesheet" href="./stile/stile.css">
+        <!--JQuery CDN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            /*chiamate ajax che rimandano ai file api
+            chiamate get, post, put, delete
+            $.ajax
+            .done
+            .fail
+            */
+        </script>
+    </head>
+
+    <body>
+        <p id="title">TECH WEB - CASE STUDY #2</p>
+        <br/>
+        <span>
+            Descrizione negozio di fumetti tipo: <br/>
+            <strong>backend</strong>=> i dati del database, 
+            i servizi sono nella cartella api (create, delete, read, read.one, update, search)
+            <br/>
+            <strong>frontend</strong> => index
+
+        </span>
+        <div>
+            <form action="../api_server/test.php" method="get">
+                <span>database test -> </span>
+                <input type="submit" value="prova">
+            </form>
+        </div>
+        <div>
+            <form action="../api_server/create.php" method="get">
+                <span>add new item -> </span>
+                <br/>
+                <span>nome:</span>
+                <input type="text" name="new_item"><br/>
+                <span>descrizione:</span>
+                <input type="text" name="descrizione"><br />
+                <span>il prezzo è un numero o un testo?:</span>
+                <input type="text" name="prezzo"><br />
+                <span>categoria id: 1(tex) 2(dylan dog) 3(topolino):</span>
+                <input type="text" name="cat_id"><br /><br/>
+
+                <input type="submit" value="Aggiugi">
+            </form>
+        </div>
+    </body>
+</html>
