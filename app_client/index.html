@@ -16,6 +16,33 @@
             .done
             .fail
             */
+
+            $(document).ready(function(){
+                $("#click").on("click", function(){
+                    $.ajax({
+                        url:"../api_server/api/read.php",
+                        type:"GET",
+                        dataType:'json'
+                    })
+                    .done(function(response){
+                        var lista = "<ul>";
+                            for(let i = 0; i < response.products.length; i++){
+                                var id = response.products[i].id;
+                                var nome = response.products[i].name;
+                                var prezzo = response.products[i].price;
+                                lista += "<li>" + id + " " + nome + " " + prezzo + "</li>";
+                            }
+                        lista += "</ul>";
+                        $("#AllProducts").html(lista);
+                    })
+                    .fail(function(xhr, resp, text){
+                        console.log(xhr, resp, text);
+                        $("#AllProducts").html(xhr+resp+text);
+                    });
+                    return false;//necessario per far funzionare on click
+                });
+                
+            });
         </script>
     </head>
 
@@ -31,13 +58,19 @@
 
         </span>
         <div>
-            <form action="../api_server/test.php" method="get">
+            <span id="AllProducts">
+                Elenco di tutti i prodotti:
+            </span>
+            <a href="#" id="click"> Clicca per vedere</a><br/>
+        </div>
+        <div>
+            <form action="../api_server/api/test.php" method="get">
                 <span>database test -> </span>
                 <input type="submit" value="prova">
             </form>
         </div>
         <div>
-            <form action="../api_server/create.php" method="get">
+            <form action="../api_server/api/create.php" method="get">
                 <span>add new item -> </span>
                 <br/>
                 <span>nome:</span>
@@ -50,6 +83,16 @@
                 <input type="text" name="cat_id"><br /><br/>
 
                 <input type="submit" value="Aggiugi">
+            </form>
+        </div>
+        <br/>
+        <div>
+            <form action="../api_server/api/update.php" method="get">
+                <span>Scegli id del prodotto da cambiare:</span>
+                <input type="text" name="id_vecchio"><br/>
+                <span>Scegli il nuovo nome del prodotto:</span>
+                <input type="text" name="nome_nuovo"><br/>
+                <input type="submit" value="Aggiorna">
             </form>
         </div>
     </body>

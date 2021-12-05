@@ -1,5 +1,5 @@
 <?php
-include_once("./dataMgr/Database.php");
+include_once("../dataMgr/Database.php");
 
 //creare una connessione al DBMS
 $database = new Database();

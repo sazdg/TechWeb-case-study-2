@@ -24,7 +24,18 @@ class Prodotto {
         $this->name = $name_par;
     }
 
-    //servizio di lettura di tutti i prodotti
+    //servizio di lettura di tutti i prodotti - chiamata ajax
+    public function read(){
+        $query = "SELECT * FROM prodotti";
+
+        //preparare ed eseguire
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        //recordset
+        return $stmt;
+    }
+
     //servizio di letura di un prodotto, dato il suo id
     //servizio di inserimento di un nuovo prodotto
     public function create($prod, $desc, $prezzo, $cat_id){
@@ -48,15 +59,23 @@ class Prodotto {
                 "prezzo" => $prezzo,
                 "cat_id" => $cat_id,
             ]);
+            //MANCA sanificare i dati 
 
-            echo " Operazione avvenuta con successo: creazione di un nuovo prodotto " . $prod;
-            
+            echo " Operazione avvenuta con successo: creazione di un nuovo prodotto => " . $prod;
+
         } catch (PDOException $e){
             echo " Failed, so sorry ". $e->getMessage();
         }
 
     }
     //servizio di aggiornamento dei dati di un prodotto
+    public function update($id, $nome){
+        $stmt = $this->conn->query("SELECT * FROM prodotti WHERE id = $id");
+
+        //update statement not correct
+        $stmt2 = $this->conn->prepare("UPDATE nome FROM prodotti WHERE id = $id");
+        $this->name = $nome;
+    }
     //servizio di cancellazione di un prodotto 
     //servizio di ricerca prodotti per keyword
 }
