@@ -33,6 +33,7 @@ if($conta > 0){
     http_response_code(200);
     //trasformo la coppia products in un oggtto JSON vero e lo invio in http response
     echo json_encode($lista_prodotti);
+    
 } else {
     http_response_code(404);
     echo json_encode(array("message" => "no products found"));

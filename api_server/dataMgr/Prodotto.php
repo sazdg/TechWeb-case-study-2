@@ -24,6 +24,10 @@ class Prodotto {
         $this->name = $name_par;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
+
     //servizio di lettura di tutti i prodotti - chiamata ajax
     public function read(){
         $query = "SELECT * FROM prodotti";
@@ -62,6 +66,7 @@ class Prodotto {
             //MANCA sanificare i dati 
 
             echo " Operazione avvenuta con successo: creazione di un nuovo prodotto => " . $prod;
+            print "<br/><a href='http://localhost/cime/case-study-2/app_client/index.html'>Torna alla home</a>";
 
         } catch (PDOException $e){
             echo " Failed, so sorry ". $e->getMessage();
@@ -77,6 +82,16 @@ class Prodotto {
         $this->name = $nome;
     }
     //servizio di cancellazione di un prodotto 
+    public function delete(){
+        $query = "DELETE FROM prodotti where ID = ?";
+
+        $stmt = $this->conn->prepare($query);
+        //invio il valore per il parametro
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+
+        return $stmt;
+    }
     //servizio di ricerca prodotti per keyword
 }
 ?>

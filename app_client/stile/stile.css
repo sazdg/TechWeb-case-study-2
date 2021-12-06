@@ -1,7 +1,31 @@
 html {
-    background-color: #4eecf1;
+    background-color: #FFE4B7;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 #title {
-    background-color: gold;
+    background-color: #51d49c;
     font-size: 25px;
+    color: #FFE4B7;
+    padding: 30px;
+    margin: 0;
+}
+#consegna {
+    padding: 15px;
+}
+#_read, #_test, #_create, #_update, #_delete {
+    padding: 15px;
+}
+input[type="submit"]{
+    background-color: #51d49c;
+    padding: 7px 15px;
+    margin: 10px 10px;
+    border-radius: 30px;
+    border-style: none;
+    cursor: pointer;
+}
+input[type="text"]{
+    padding: 7px 15px;
+    margin: 10px 10px;
+    border-radius: 30px;
+    border-style: none;
 }
