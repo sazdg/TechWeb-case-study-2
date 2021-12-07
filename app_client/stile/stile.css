@@ -29,3 +29,7 @@ input[type="text"]{
     border-radius: 30px;
     border-style: none;
 }
+
+.risp {
+    background-color: aqua;
+}

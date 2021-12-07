@@ -52,8 +52,7 @@ class Prodotto {
             $id = $result["id"] + 1;
             //echo $id . " -> calcolo id avvenuto con successo<br/>";
         }
-
-        try{
+        
             $query = $this->conn->prepare("INSERT INTO prodotti(id, nome, descrizione, prezzo, cat_id) VALUES (:id, :item, :descrizione, :prezzo, :cat_id)");
 
             $query->execute([
@@ -63,23 +62,24 @@ class Prodotto {
                 "prezzo" => $prezzo,
                 "cat_id" => $cat_id,
             ]);
-            //MANCA sanificare i dati 
+            //MANCA sanificare i dati
+            return $query;
+            //restituisce true, entra nell'if true, manda il messaggio json con echo 
 
-            echo " Operazione avvenuta con successo: creazione di un nuovo prodotto => " . $prod;
-            print "<br/><a href='http://localhost/cime/case-study-2/app_client/index.html'>Torna alla home</a>";
-
-        } catch (PDOException $e){
-            echo " Failed, so sorry ". $e->getMessage();
-        }
 
     }
     //servizio di aggiornamento dei dati di un prodotto
-    public function update($id, $nome){
-        $stmt = $this->conn->query("SELECT * FROM prodotti WHERE id = $id");
+    public function update($num, $nominativo){
+        $q = "UPDATE prodotti SET nome = :nominat WHERE id = :num";
+        $zzz = $this->conn->prepare($q);
+        
+        
+        $zzz->execute([
+            "num" => $num,
+            "nominat" => $nominativo,
+        ]);
 
-        //update statement not correct
-        $stmt2 = $this->conn->prepare("UPDATE nome FROM prodotti WHERE id = $id");
-        $this->name = $nome;
+        return $zzz;
     }
     //servizio di cancellazione di un prodotto 
     public function delete(){
