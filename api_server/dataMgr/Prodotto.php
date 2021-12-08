@@ -28,6 +28,10 @@ class Prodotto {
         $this->id = $id;
     }
 
+    public function setDescr($d){
+        $this->description = $d;
+    }
+
     //servizio di lettura di tutti i prodotti - chiamata ajax
     public function read(){
         $query = "SELECT * FROM prodotti";
@@ -38,6 +42,27 @@ class Prodotto {
 
         //recordset
         return $stmt;
+    }
+
+    public function readOne(){
+        $x = "SELECT * FROM prodotti WHERE id = ?";
+        $result = $this->conn->prepare($x);
+        $result->bindParam(1, $this->id);
+        $result->execute();
+
+        return $result;
+    }
+
+    public function search(){
+        $z = "SELECT * FROM prodotti WHERE nome LIKE :n OR descrizione LIKE :d";
+        $records = $this->conn->prepare($z);
+        $records->execute([
+            "n" => "%" . $this->name . "%",
+            "d" => "%" . $this->description . "%",
+            //%parola%
+        ]);
+
+        return $records;
     }
 
     //servizio di letura di un prodotto, dato il suo id

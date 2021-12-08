@@ -14,9 +14,10 @@
             $(document).ready(function(){
 
                 $("#leggi").on("click", function(){
+
                     $.ajax({
                         url:"../api_server/api/read.php",
-                        type:"POST",
+                        type:"GET",
                         dataType:'json'
                     })
                     .done(function(response){
@@ -37,6 +38,47 @@
                     return false;//necessario per far funzionare on click
                 });
 
+                $("#readOne").on("click", function(){
+                    var leggi = $("#leggi_id").val();
+
+                    $.ajax({
+                        url:"http://localhost/cime/case-study-2/api_server/api/readone.php?id="+leggi,
+                        type:"GET",
+                        dataType:"json",
+                    })
+                    .done(function(response){
+                        var r = "<p>"+response.id+"<br/>"+response.nome+"<br/>"+response.descrizione+"<br/>"+response.prezzo+"</p>";
+
+                        $("#show_one").html(r);
+                    })
+                    .fail(function(xhr, resp, text){
+                        console.log(xhr, resp, text);
+                    });
+                    return false;
+                });
+
+                $("#send_search").on("click", function(){
+                    var smth = $("#search_smth").val();
+                    $.ajax({
+                        url:"http://localhost/cime/case-study-2/api_server/api/search.php?smth="+smth,
+                        type:"GET",
+                        dataType:"json"
+                    })
+                    .done(function(response){
+                        var x = "<ul>";
+                        for(let i = 0; i < response.ris.length; i++){
+                            x += "<li>" + response.ris[i].id + " " + response.ris[i].nome + " " + response.ris[i].descrizione + " " + response.ris[i].prezzo + "</li>";
+                        }
+                        x += "</ul>";
+                        
+                        
+                        $("#show_search").html(x);
+                    })
+                    .fail(function(xhr,resp,text){
+                        console.log(xhr,resp,text)
+                    });
+                    return false;
+                });
             
                 $("#create").on("click", function(){
                     var lista1 = {
@@ -76,7 +118,7 @@
 
                     $.ajax({
                         url:"http://localhost/cime/case-study-2/api_server/api/update.php",
-                        type:"POST",
+                        type:"PUT",
                         contentType:"application/json",
                         dataType:"json",
                         data: datiJson
@@ -125,10 +167,19 @@
         <div id="consegna">
             Descrizione negozio di fumetti tipo: <br/>
             <strong>backend:</strong> i dati del database, 
-            i servizi sono nella cartella api (-create, -delete, -read, read.one, -update, search)
+            i servizi sono nella cartella api (-create, -delete, -read, -read.one, -update, -search)
             <br/>
             fare il controllo delle variabili
             <strong>frontend:</strong> index html
+        </div>
+
+        <div id="_search">
+            <!--AJAX-->
+            <span><strong>Cerca un prodotto con una parola chiave:</strong></span><br/>
+            <input type="text" id="search_smth">
+            <button type="button" id="send_search">CERCA</button><br/>
+
+            <div id="show_search" class="risp"></div>
         </div>
 
         <div id="_read">
@@ -136,9 +187,16 @@
             <span><strong>Elenco di tutti i prodotti:</strong></span><br/>
             <span id="AllProducts"></span>
             <a href="#" id="leggi"> Clicca per vedere/aggiornare</a><br/>
+            
         </div>
 
-        <div id="_read_one"></div>
+        <div id="_read_one">
+            <!--AJAX-->
+            <span><strong>Scrivi l'ID del singolo prodotto che vuoi vedere:</strong></span><br/>
+            <input type="text" id="leggi_id"><br/>
+            <button type="button" id="readOne">Controlla prodotto</button><br/><br/>
+            <div id="show_one" class="risp"></div>
+        </div>
 
         <div id="_test">
             <span><strong>Database test:</strong></span>
@@ -148,7 +206,6 @@
             </form>
         </div>
 
-        <div id="_search"></div>
 
         <div id="_create">
             <!--AJAX-->

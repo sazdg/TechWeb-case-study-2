@@ -12,7 +12,7 @@ html {
 #consegna {
     padding: 15px;
 }
-#_read, #_test, #_create, #_update, #_delete {
+#_read, #_test, #_create, #_update, #_delete, #_read_one, #_search {
     padding: 15px;
 }
 input[type="submit"]{
