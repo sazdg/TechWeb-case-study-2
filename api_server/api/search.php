@@ -19,7 +19,8 @@ if($risultato){
             "id" => $row["id"],
             "nome" => $row["nome"],
             "descrizione" => $row["descrizione"],
-            "prezzo" => $row["prezzo"]
+            "prezzo" => $row["prezzo"],
+            "categoria" => $row["cat_id"]
         );
         array_push($risultati_ricerche["ris"], $p);
     }

@@ -25,7 +25,9 @@ if($conta > 0){
         $prodotto = array(
             "id" => $row["id"],
             "name" => $row["nome"],
-            "price" => $row["prezzo"]
+            "price" => $row["prezzo"],
+            "category_name" => $row["cat_id"]
+            //DA FARE sostiruire il numero della categoria con il testo categoria
         );
         //oggetto array, con le specifiche di 1 oggetto, si aggiunge all'array products dentro l'array originale lista_prodotti
         array_push($lista_prodotti["products"], $prodotto);

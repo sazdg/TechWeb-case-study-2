@@ -1,258 +1,110 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PHP case study 2</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="case study #2" />
-        <meta name="author" content="saz" />
-        <link rel="stylesheet" href="./stile/stile.css">
-        <!--JQuery CDN-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <script>
+<head>
+    <title>PHP case study 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="case study #2" />
+    <meta name="author" content="saz" />
+    <!--JQuery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Boostrap CSS CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--Bootstrap Javascript CDN-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-            $(document).ready(function(){
-
-                $("#leggi").on("click", function(){
-
-                    $.ajax({
-                        url:"../api_server/api/read.php",
-                        type:"GET",
-                        dataType:'json'
-                    })
-                    .done(function(response){
-                        var lista = "<ul>";
-                            for(let i = 0; i < response.products.length; i++){
-                                var id = response.products[i].id;
-                                var nome = response.products[i].name;
-                                var prezzo = response.products[i].price;
-                                lista += "<li>" + id + " " + nome + " " + prezzo + "</li>";
-                            }
-                        lista += "</ul>";
-                        $("#AllProducts").html(lista);
-                    })
-                    .fail(function(xhr, resp, text){
-                        console.log(xhr, resp, text);
-                        $("#AllProducts").html(xhr+resp+text);
-                    });
-                    return false;//necessario per far funzionare on click
-                });
-
-                $("#readOne").on("click", function(){
-                    var leggi = $("#leggi_id").val();
-
-                    $.ajax({
-                        url:"http://localhost/cime/case-study-2/api_server/api/readone.php?id="+leggi,
-                        type:"GET",
-                        dataType:"json",
-                    })
-                    .done(function(response){
-                        var r = "<p>"+response.id+"<br/>"+response.nome+"<br/>"+response.descrizione+"<br/>"+response.prezzo+"</p>";
-
-                        $("#show_one").html(r);
-                    })
-                    .fail(function(xhr, resp, text){
-                        console.log(xhr, resp, text);
-                    });
-                    return false;
-                });
-
-                $("#send_search").on("click", function(){
-                    var smth = $("#search_smth").val();
-                    $.ajax({
-                        url:"http://localhost/cime/case-study-2/api_server/api/search.php?smth="+smth,
-                        type:"GET",
-                        dataType:"json"
-                    })
-                    .done(function(response){
-                        var x = "<ul>";
-                        for(let i = 0; i < response.ris.length; i++){
-                            x += "<li>" + response.ris[i].id + " " + response.ris[i].nome + " " + response.ris[i].descrizione + " " + response.ris[i].prezzo + "</li>";
-                        }
-                        x += "</ul>";
-                        
-                        
-                        $("#show_search").html(x);
-                    })
-                    .fail(function(xhr,resp,text){
-                        console.log(xhr,resp,text)
-                    });
-                    return false;
-                });
-            
-                $("#create").on("click", function(){
-                    var lista1 = {
-                        item: $("#new_item").val(),
-                        descrizione: $("#descrizione").val(),
-                        prezzo: $("#prezzo").val(),
-                        cat_id: $("#cat_id").val()
-                    };
-
-                    let listaJson = JSON.stringify(lista1);
-
-                    $.ajax({
-                        url:"http://localhost/cime/case-study-2/api_server/api/create.php",
-                        type: "POST",
-                        contentType: 'application/json', // formato dei dati della request
-                        dataType: "json",
-                        data: listaJson
-                    })
-                    .done(function(datas){
-                        risp = "<p>"+datas.message+"</p>";
-                        $("#response_create").html(risp);
-                    })
-                    .fail(function(xhr, resp, text){
-                        console.log(text);
-                    });
-                    return false;
-                });
-
-                $("#update").on("click", function(){
-
-                    var dati = {
-                        id: $("#id_vecchio").val(),
-                        nome: $("#nome_nuovo").val()
-                    };
-
-                    let datiJson = JSON.stringify(dati);
-
-                    $.ajax({
-                        url:"http://localhost/cime/case-study-2/api_server/api/update.php",
-                        type:"PUT",
-                        contentType:"application/json",
-                        dataType:"json",
-                        data: datiJson
-                    })
-                    .done(function(response){
-                        risultato = "<p>"+response.message+"</p>";
-                        //non funge
-                        $("#response_update").html(risultato);
-                    })
-                    .fail(function (xhr, resp, text) {
-                        console.log(xhr,resp,text);
-                     });
-                    return false;
-                });
+    <link rel="stylesheet" href="./stile/style.css">
 
 
-                $("#delete").on("click", function(){
+</head>
 
-                    var id_elimina = $("#eliminare").val();
-                    $.ajax({
-                        url: "http://localhost/cime/case-study-2/api_server/api/delete.php?eliminare="
-                        +id_elimina,
-                        //sembra una finta get, c'è l'url ma non c'è il method e non c'è il form
-                        type: "DELETE",
-                        dataType: 'json',
-                        
-                    })
-                    .done(function(response){
-                        html_par = "<p>"+response.message+"</p>";
-                        $("#response_delete").html(html_par);
-                    })
-                    .fail(function(xhr, resp, text){
-                        console.log(xhr, resp, text);
-                    });
-                    return false;
-                });
-                
-            });
-        </script>
-    </head>
+<body>
 
-    <body>
-        
-        <p id="title">TECH WEB - CASE STUDY #2</p>
-        <br/>
-        <div id="consegna">
-            Descrizione negozio di fumetti tipo: <br/>
-            <strong>backend:</strong> i dati del database, 
-            i servizi sono nella cartella api (-create, -delete, -read, -read.one, -update, -search)
-            <br/>
-            fare il controllo delle variabili
-            <strong>frontend:</strong> index html
-        </div>
+    <p class="container-fluid row" id="title">TECH WEB - CASE STUDY #2</p>
+    <br />
+    <div id="app"></div>
 
-        <div id="_search">
-            <!--AJAX-->
-            <span><strong>Cerca un prodotto con una parola chiave:</strong></span><br/>
-            <input type="text" id="search_smth">
-            <button type="button" id="send_search">CERCA</button><br/>
+    <div class="container-fluid" id="_create">
+        <!--AJAX-->
+        <button type="button" class="btn btn-primary" id="openform">Crea un nuovo prodotto</button>
+        <br />
+    </div>
 
-            <div id="show_search" class="risp"></div>
-        </div>
+    <div class="container-fluid row" id="_search">
+        <!--AJAX-->
+        <div class="container row">
+            <span><strong>Cerca un prodotto con una parola chiave:</strong></span><br />
 
-        <div id="_read">
-            <!--AJAX-->
-            <span><strong>Elenco di tutti i prodotti:</strong></span><br/>
-            <span id="AllProducts"></span>
-            <a href="#" id="leggi"> Clicca per vedere/aggiornare</a><br/>
-            
-        </div>
-
-        <div id="_read_one">
-            <!--AJAX-->
-            <span><strong>Scrivi l'ID del singolo prodotto che vuoi vedere:</strong></span><br/>
-            <input type="text" id="leggi_id"><br/>
-            <button type="button" id="readOne">Controlla prodotto</button><br/><br/>
-            <div id="show_one" class="risp"></div>
-        </div>
-
-        <div id="_test">
-            <span><strong>Database test:</strong></span>
-
-            <form action="../api_server/api/test.php" method="get">
-                <input type="submit" value="Test">
-            </form>
-        </div>
-
-
-        <div id="_create">
-            <!--AJAX-->
-            <span><strong>Crea un nuovo prodotto:</strong></span>
-            <br />
-
-            <div>
-                <span>Nome:</span><br/>
-                <input type="text" name="new_item" id="new_item"><br/>
-                <span>Descrizione:</span><br/>
-                <input type="text" name="descrizione" id="descrizione"><br />
-                <span>Prezzo:</span><br/>
-                <input type="text" name="prezzo" id="prezzo"><br />
-                <span>Categoria id: 1(tex) 2(dylan dog) 3(topolino):</span><br/>
-                <input type="text" name="cat_id" id="cat_id"><br />
-                <button type="button" id="create">Aggiungi</button>
+            <div class="input-group-addon mb-3">
+                <input type="text" id="search_smth" placeholder="Cerca...">
             </div>
-            <div class="risp" id="response_create"></div>
-        </div>
-
-        <div id="_delete">
-            <!--AJAX-->
-            <span><strong>Elimina un prodotto:</strong></span><br/>
-            
-            <div>
-                <span>ID (numeri):</span><br/>
-                <input type="text" name="eliminare" id="eliminare"><br/>
-                <button type="button" id="delete">Elimina</button>
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary" id="send_search">CERCA</button>
             </div>
 
-            <div class="risp" id="response_delete"></div>
+        </div><br />
+
+        <!--RISULTATI DELLA RICERCA - tabella-->
+        <div class="container row">
+            <div id="show_search" class="risp table-responsive"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid row" id="_read">
+        <!--AJAX-->
+        <div class="container row">
+            <p><strong>Elenco di tutti i prodotti:</strong></p><br />
+            <div class="table-responsive" id="AllProducts"></div>
+
+            <!--BOTTONE AGGIORNA TABELLA
+            <a href="#" class="btn btn-primary" id="leggi">Clicca per aggiornare la lista</a>
+            -->
+        </div>
+    </div>
+
+    <div class="container-fluid" id="_read_one">
+        <!--AJAX-->
+        <div class="container row">
+            <span><strong>Scrivi l'ID del singolo prodotto che vuoi vedere:</strong></span><br />
+            <input type="text" id="leggi_id"><br />
+            <button type="button" class="btn btn-primary" id="readOne">Controlla prodotto</button>
         </div>
 
-        <div id="_update">
-            <!--AJAX-->
-            <span><strong>Aggiorna le informazioni di un prodotto:</strong></span><br/>
-            <div>
-                <span>Scegli l'ID del prodotto da cambiare:</span><br/>
-                <input type="text" id="id_vecchio"><br/>
-                <span>Scegli il nuovo nome del prodotto:</span><br/>
-                <input type="text" id="nome_nuovo"><br/>
-                <button type="button" id="update">Aggiorna</button>
-            </div>
-            
-            <div class="risp" id="response_update"></div>
-           
+        <div id="show_one" class="risp row"></div>
+    </div>
+
+    <div class="container-fluid" id="_delete">
+        <!--AJAX-->
+        <span><strong>Elimina un prodotto:</strong></span><br />
+
+        <div class="container row">
+            <span>ID (numeri):</span><br />
+            <input type="text" name="eliminare" id="eliminare"><br />
+            <button type="button" class="btn btn-primary" id="delete">Elimina</button>
         </div>
-        <br/><br/>
-    </body>
+
+        <div class="risp row" id="response_delete"></div>
+    </div>
+
+    <div class="container-fluid" id="_update">
+        <!--AJAX-->
+        <span><strong>Aggiorna le informazioni di un prodotto:</strong></span><br />
+        <div class="container row">
+            <span>Scegli l'ID del prodotto da cambiare:</span><br />
+            <input type="text" id="id_vecchio"><br />
+            <span>Scegli il nuovo nome del prodotto:</span><br />
+            <input type="text" id="nome_nuovo"><br />
+            <button type="button" class="btn btn-primary" id="update">Aggiorna</button>
+        </div>
+
+        <div class="risp row" id="response_update"></div>
+
+    </div>
+    <br /><br />
+    <script src="./app.js"></script>
+    <script src="./read.js"></script>
+    <script src="./test.js"></script>
+    <script src="./create.js"></script>
+</body>
+
 </html>

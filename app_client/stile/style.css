@@ -1,0 +1,44 @@
+body {
+    background-color: #fff1e0;
+}
+#title {
+    background-color: #51d49c;
+    padding: 2rem;
+    margin: 0;
+}
+.container-fluid {
+    margin: 15px;
+}
+.btn-primary {
+    background-color: #51d49c;
+    border-style: none;
+}
+input[type="text"]{
+    padding: 7px 15px;
+    margin: 10px 5px;
+    border-radius: 30px;
+    border-style: none;
+}
+.btn {
+    border-radius: 30px;
+    margin: 0px 5px;
+}
+p {
+    margin: 0;
+}
+table {
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+
+#search_smth{
+    border-radius: 0;
+    margin: 10px 0px;
+}
+.input-group-addon, .input-group-btn {
+    padding: 0;
+    text-align: inherit;
+    background-color: inherit;
+    border: none;
+    width: 0;
+}
