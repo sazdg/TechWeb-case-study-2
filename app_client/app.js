@@ -56,9 +56,9 @@ $(document).ready(function () {
                     x += "<tr><td>" + response.ris[i].nome + "</td><td> " + response.ris[i].prezzo + "$</td><td>" + response.ris[i].categoria;
 
                     x += `</td><td>
-                    <button type="button" class="btn btn-primary btn-sm">Read</button>
-                    <button type="button" class="btn btn-info btn-sm">Edit</button>
-                    <button type="button" class="btn btn-danger btn-sm">X Delete</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="leggi">Read</button>
+                    <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="cancella">X Delete</button>
                     </td></tr>`;
                 }
 
@@ -72,33 +72,7 @@ $(document).ready(function () {
         return false;
     });
 
-    /*  $("#create").on("click", function () {
-          var lista1 = {
-              item: $("#new_item").val(),
-              descrizione: $("#descrizione").val(),
-              prezzo: $("#prezzo").val(),
-              cat_id: $("#cat_id").val()
-          };
-  
-          let listaJson = JSON.stringify(lista1);
-  
-          $.ajax({
-              url: "http://localhost/cime/case-study-2/api_server/api/create.php",
-              type: "POST",
-              contentType: 'application/json', // formato dei dati della request
-              dataType: "json",
-              data: listaJson
-          })
-              .done(function (datas) {
-                  risp = "<p>" + datas.message + "</p><br/>";
-                  $("#response_create").html(risp);
-              })
-              .fail(function (xhr, resp, text) {
-                  console.log(text);
-              });
-          return false;
-      });
-  */
+
     $("#update").on("click", function () {
 
         var dati = {
@@ -126,8 +100,8 @@ $(document).ready(function () {
         return false;
     });
 
-
-    $("#delete").on("click", function () {
+/*
+    $(document).on("click", "#delete", function () {
 
         var id_elimina = $("#eliminare").val();
         $.ajax({
@@ -147,5 +121,5 @@ $(document).ready(function () {
             });
         return false;
     });
-
+*/
 });

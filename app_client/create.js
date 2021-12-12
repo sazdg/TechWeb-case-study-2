@@ -15,13 +15,10 @@ $(document).ready(function () {
         <div class="container-fluid risp row" id="response_create"></div>`;
 
     $(document).on("click", "#openform", function () {
-        console.log("click primo evento");
-        $("#creaform").html(form);
+        $("#app").html(form);
     });
 
     $(document).on("click", "#create", function () {
-
-        console.log("click secondo evento create.js");
 
         var lista1 = {
             item: $("#new_item").val(),

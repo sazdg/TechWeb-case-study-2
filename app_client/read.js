@@ -19,7 +19,10 @@ $(document).ready(function () {
                         <th scope='col'>Azioni</th>
                     </tr>
                 </thead><tbody>`;
-                for (let i = 0; i < response.products.length; i++) {
+
+                var len = response.products.length;
+                for (let i = 0; i < len; i++) {
+                    
                     var id = response.products[i].id;
                     var nome = response.products[i].name;
                     var prezzo = response.products[i].price;
@@ -28,11 +31,12 @@ $(document).ready(function () {
                     lista += "<tr><td>" + id + "</td><td>" + nome + "</td><td> " + prezzo + "$</td><td>" + categoria;
 
                     lista += `</td><td>
-                    <button type="button" class="btn btn-primary btn-sm">Read</button>
-                    <button type="button" class="btn btn-info btn-sm">Edit</button>
-                    <button type="button" class="btn btn-danger btn-sm">X Delete</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="leggi">Read</button>
+                    <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + id + `">X Delete</button>
                     </td></tr>`;
                 }
+                //ADD CUSTOM ATTRIBUTE TO THE BUTTONS 
                 lista += "</tbody></table>";
                 $("#AllProducts").html(lista);
             })
