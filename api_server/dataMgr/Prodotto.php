@@ -28,6 +28,14 @@ class Prodotto {
         $this->id = $id;
     }
 
+    public function setPrice($pr){
+        $this->pric = $pr;
+    }
+
+    public function setCat($cat){
+        $this->category_id = $cat;
+    }
+
     public function setDescr($d){
         $this->description = $d;
     }
@@ -94,14 +102,16 @@ class Prodotto {
 
     }
     //servizio di aggiornamento dei dati di un prodotto
-    public function update($num, $nominativo){
-        $q = "UPDATE prodotti SET nome = :nominat WHERE id = :num";
+    public function update($num, $nominativo, $descr, $prezzzo, $categoria){
+        $q = "UPDATE prodotti SET nome = :nominat, descrizione = :descr, prezzo = :pr, cat_id = :cat WHERE id = :num";
         $zzz = $this->conn->prepare($q);
-        
-        
+
         $zzz->execute([
             "num" => $num,
             "nominat" => $nominativo,
+            "descr" => $descr,
+            "pr" => $prezzzo,
+            "cat" => $categoria
         ]);
 
         return $zzz;

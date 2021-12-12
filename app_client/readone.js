@@ -31,7 +31,7 @@ $(document).ready(function () {
 
                 script += `
                 </td><td>
-                    <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
+                    <button type="button" class="btn btn-info btn-sm" id="modifica" data-index="` + response.id + `">Edit</button>
                     <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + response.id + `">X Delete</button>
                     </td></tr></tbody></table></div>
                     <div class="table-responsive" id="products_response"></div>

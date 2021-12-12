@@ -14,7 +14,7 @@ $(document).ready(function () {
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-primary" id="send_search">CERCA</button>
             </div>
-        </div></div><br />
+        </div></div>
 
         <!--TABELLA DEI PRODOTTI-->
         <div class="container-fluid row" id="_read">
@@ -55,7 +55,7 @@ $(document).ready(function () {
 
                     x += `</td><td>
                     <button type="button" class="btn btn-primary btn-sm" id="leggi" data-index="` + response.ris[i].id + `">Read</button>
-                    <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
+                    <button type="button" class="btn btn-info btn-sm" id="modifica" data-index="` + response.ris[i].id + `">Edit</button>
                     <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + response.ris[i].id + `">X Delete</button>
                     </td></tr>`;
                 }

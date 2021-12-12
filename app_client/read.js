@@ -34,7 +34,7 @@ $(document).ready(function () {
 
                     lista += `</td><td>
                     <button type="button" class="btn btn-primary btn-sm" id="leggi" data-index="` + id + `">Read</button>
-                    <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
+                    <button type="button" class="btn btn-info btn-sm" id="modifica" data-index="` + id + `">Edit</button>
                     <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + id + `">X Delete</button>
                     </td></tr>`;
                 }
