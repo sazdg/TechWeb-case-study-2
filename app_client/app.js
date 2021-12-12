@@ -12,8 +12,9 @@ $(document).ready(function () {
     </div >`;
 
     $("#app").html(home);
+    //testo per la home
 
-
+/*
     $("#readOne").on("click", function () {
         var leggi = $("#leggi_id").val();
 
@@ -32,6 +33,7 @@ $(document).ready(function () {
             });
         return false;
     });
+    */
 
     $("#send_search").on("click", function () {
         var smth = $("#search_smth").val();
@@ -100,26 +102,4 @@ $(document).ready(function () {
         return false;
     });
 
-/*
-    $(document).on("click", "#delete", function () {
-
-        var id_elimina = $("#eliminare").val();
-        $.ajax({
-            url: "http://localhost/cime/case-study-2/api_server/api/delete.php?eliminare="
-                + id_elimina,
-            //sembra una finta get, c'è l'url ma non c'è il method e non c'è il form
-            type: "DELETE",
-            dataType: 'json',
-
-        })
-            .done(function (response) {
-                html_par = "<p>" + response.message + "</p>";
-                $("#response_delete").html(html_par);
-            })
-            .fail(function (xhr, resp, text) {
-                console.log(xhr, resp, text);
-            });
-        return false;
-    });
-*/
 });

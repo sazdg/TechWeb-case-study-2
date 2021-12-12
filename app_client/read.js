@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //subito chiamata al db per mostrare la tabella
     showTable();
 
     function showTable() {
@@ -31,7 +32,7 @@ $(document).ready(function () {
                     lista += "<tr><td>" + id + "</td><td>" + nome + "</td><td> " + prezzo + "$</td><td>" + categoria;
 
                     lista += `</td><td>
-                    <button type="button" class="btn btn-primary btn-sm" id="leggi">Read</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="leggi" data-index="` + id + `">Read</button>
                     <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
                     <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + id + `">X Delete</button>
                     </td></tr>`;
