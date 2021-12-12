@@ -12,7 +12,7 @@ $(document).ready(function () {
         })
             .done(function (response) {
 
-                var page = `
+                var script = `
                 <p class="container-fluid row" id="title">TECH WEB - CASE STUDY #2</p><br />
                 <div class="container-fluid row">
                 <div class="container row">
@@ -27,19 +27,20 @@ $(document).ready(function () {
                     </tr>
                 </thead><tbody>`;
 
-                page += "<tr><td>" + response.id + "</td><td>" + response.nome + "</td><td>" + response.descrizione + "</td><td>" + response.prezzo + "</td><td>" + response.categoria + "</td>";
+                script += "<tr><td>" + response.id + "</td><td>" + response.nome + "</td><td>" + response.descrizione + "</td><td>" + response.prezzo + "</td><td>" + response.categoria + "</td>";
 
-                page += `
+                script += `
                 </td><td>
-                    <button type="button" class="btn btn-primary btn-sm" id="leggi" data-index="` + response.id + `">Read</button>
                     <button type="button" class="btn btn-info btn-sm" id="modifica">Edit</button>
                     <button type="button" class="btn btn-danger btn-sm" id="cancella" data-index="` + response.id + `">X Delete</button>
                     </td></tr></tbody></table></div>
-                <div class="container row">
-                <a href="./index.html" class="badge badge-success">Torna alla home</a></div>`;
+                    <div class="table-responsive" id="products_response"></div>
+                    <div class="row" id="risposta"></div>
+                <div class="row"><div class="container-fluid row">
+                <a href="./index.html" class="badge badge-success">Torna alla home</a></div></div>`;
 
                 //document.write returns console warning
-                $(document.body).html(page);
+                $(document.body).html(script);
             })
             .fail(function (xhr, resp, text) {
                 console.log(xhr, resp, text);

@@ -23,46 +23,7 @@
     <br />
     <div id="app"></div>
 
-    <div class="container-fluid" id="_create">
-        <!--AJAX-->
-        <button type="button" class="btn btn-primary" id="openform">Crea un nuovo prodotto</button>
-        <br />
-    </div>
-
-    <div class="container-fluid row" id="_search">
-        <!--AJAX-->
-        <div class="container row">
-            <span><strong>Cerca un prodotto con una parola chiave:</strong></span><br />
-
-            <div class="input-group-addon mb-3">
-                <input type="text" id="search_smth" placeholder="Cerca...">
-            </div>
-            <div class="input-group-btn">
-                <button type="submit" class="btn btn-primary" id="send_search">CERCA</button>
-            </div>
-
-        </div><br />
-
-        <!--RISULTATI DELLA RICERCA - tabella-->
-        <div class="container row">
-            <div id="show_search" class="risp table-responsive"></div>
-        </div>
-    </div>
-
-    <div class="container-fluid row" id="_read">
-        <!--AJAX-->
-        <div class="container row">
-            <p><strong>Elenco di tutti i prodotti:</strong></p><br />
-            <div class="table-responsive" id="AllProducts"></div>
-
-            <!--BOTTONE AGGIORNA TABELLA
-            <a href="#" class="btn btn-primary" id="leggi">Clicca per aggiornare la lista</a>
-            -->
-        </div>
-    </div>
-
     <div class="container-fluid" id="_update">
-        <!--AJAX-->
         <span><strong>Aggiorna le informazioni di un prodotto:</strong></span><br />
         <div class="container row">
             <span>Scegli l'ID del prodotto da cambiare:</span><br />
@@ -73,14 +34,19 @@
         </div>
 
         <div class="risp row" id="response_update"></div>
-
     </div>
+
     <br /><br />
+    <!--load content-->
     <script src="./app.js"></script>
-    <script src="./read.js"></script>
-    <script src="./readone.js"></script>
     <script src="./create.js"></script>
+    <script src="./search.js"></script>
+    <script src="./read.js"></script>
+    
+    <!--response page-->
+    <script src="./readone.js"></script>
     <script src="./delete.js"></script>
+    <!--<script src="./update.js"></script>-->
 </body>
 
 </html>

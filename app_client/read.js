@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     //subito chiamata al db per mostrare la tabella
     showTable();
 
@@ -39,11 +40,11 @@ $(document).ready(function () {
                 }
                 //ADD CUSTOM ATTRIBUTE TO THE BUTTONS 
                 lista += "</tbody></table>";
-                $("#AllProducts").html(lista);
+                $("#Allproducts").html(lista);
             })
         .fail(function (xhr, resp, text) {
                 console.log(xhr, resp, text);
-                $("#AllProducts").html(xhr + resp + text);
+                $("#Allproducts").html(xhr + resp + text);
             });
         return false;//necessario per far funzionare on click
     };
