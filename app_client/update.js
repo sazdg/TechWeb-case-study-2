@@ -12,8 +12,37 @@ $(document).ready(function () {
             type: "GET",
             dataType: "json"
         })
-        .done(function(response){
-            var html = `
+            .done(function (response) {
+
+                var script = ` 
+            <p class="container-fluid row" id="title">TECH WEB - CASE STUDY #2</p><br />
+            <div class="container-fluid" id="_update">
+
+            <div id="bho"></div>
+
+            <span><strong>Aggiorna le informazioni del prodotto, riempi tutti i campi:</strong></span><br />
+            <div class="container row">
+                <span>Nome:</span><br />
+                <input type="text" id="nome" value="` + response.nome + `"><br />
+                <span>Descrizione:</span><br />
+                <input type="text" id="desc" value="` + response.descrizione + `"><br />
+                <span>Prezzo:</span><br />
+                <input type="text" id="pr" value="`  + response.prezzo + `"><br />
+                <span>Categoria:</span><br />
+                <select name="cat_id" id="cat">
+                    <option selected>Scegli la categoria</option>
+                    <option value="1">Tex</option>
+                    <option value="2">Dylan Dog</option>
+                    <option value="3">Topolino</option>
+                </select><br />
+                <button type="button" class="btn btn-primary" id="sendUpdate">Aggiorna</button>
+            </div>
+            <div id="risposta"></div>
+            <div class="container row"><div class="container-fluid row">
+                <a href="./index.html" class="badge badge-success">Torna alla home</a></div></div>`;
+
+
+                var html = `
             <div class="container-fluid row">
                 <div class="container row">
                 <table class="table table-hover">
@@ -28,42 +57,15 @@ $(document).ready(function () {
 
             html += "<tr><td>" + response.id + "</td><td>" + response.nome + "</td><td>" + response.descrizione + "</td><td>" + response.prezzo + "</td><td>" + response.categoria + "</td></tr></tbody></table></div></div>";
 
-            $("#bho").html(html);
-        })
-        .fail(function(xhr, resp, text){
-            console.log(xhr, resp, text);
-        });
-        //return false;
-
-        function showUpdate() {
-            var script = ` 
-        <p class="container-fluid row" id="title">TECH WEB - CASE STUDY #2</p><br />
-        <div class="container-fluid" id="_update">
-
-        <div id="bho"></div>
-
-        <span><strong>Aggiorna le informazioni del prodotto, riempi tutti i campi:</strong></span><br />
-        <div class="container row">
-            <span>Nome:</span><br />
-            <input type="text" id="nome"><br />
-            <span>Descrizione:</span><br />
-            <input type="text" id="desc"><br />
-            <span>Prezzo:</span><br />
-            <input type="text" id="pr"><br />
-            <span>Categoria:</span><br />
-            <input type="text" id="cat"><br />
-            <button type="button" class="btn btn-primary" id="sendUpdate">Aggiorna</button>
-        </div>
-        <div id="risposta"></div>
-        <div class="container row"><div class="container-fluid row">
-            <a href="./index.html" class="badge badge-success">Torna alla home</a></div></div>`;
-
+                
             $(document.body).html(script);
-        }
+            $("#bho").html(html);
 
-        
-        showUpdate();
-
+            })
+            .fail(function (xhr, resp, text) {
+                console.log(xhr, resp, text);
+            });
+        //return false;
 
         $(document).on("click", "#sendUpdate", function () {
 
@@ -77,8 +79,8 @@ $(document).ready(function () {
 
             let datiJson = JSON.stringify(dati);
 
-            console.log(dati);
-            console.log(datiJson);
+            //console.log(dati);
+            //console.log(datiJson);
 
             $.ajax({
                 url: "http://localhost/cime/case-study-2/api_server/api/update.php",

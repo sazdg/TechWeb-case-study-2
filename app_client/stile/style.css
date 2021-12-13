@@ -42,3 +42,10 @@ table {
     border: none;
     width: 0;
 }
+
+#cat_id, #cat{
+    padding: 10px;
+    margin: 15px 0px;
+    border-radius: 30px;
+    border-style: none;
+}

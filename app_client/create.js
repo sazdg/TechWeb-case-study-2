@@ -23,8 +23,13 @@ $(document).ready(function () {
             <input type="text" name="descrizione" id="descrizione"><br />
             <span>Prezzo:</span><br />
             <input type="text" name="prezzo" id="prezzo"><br />
-            <span>Categoria id: 1(tex) 2(dylan dog) 3(topolino):</span><br />
-            <input type="text" name="cat_id" id="cat_id"><br />
+            <span>Categoria appartenente:</span><br />
+            <select name="cat_id" id="cat_id">
+                <option selected>Scegli la categoria</option>
+                <option value="1">Tex</option>
+                <option value="2">Dylan Dog</option>
+                <option value="3">Topolino</option>
+                </select><br />
             <button type="submit" class="btn btn-primary" id="create">Aggiungi</button>
         </div>
         <div class="container-fluid risp row" id="response_create"></div>
