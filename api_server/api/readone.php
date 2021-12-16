@@ -20,7 +20,7 @@ if($conta > 0){
             "nome" => $row["nome"],
             "descrizione" => $row["descrizione"],
             "prezzo" => $row["prezzo"],
-            "categoria" =>$row["cat_id"]
+            "categoria" =>$row["nomecat"]
         );
     }
     echo json_encode($oggetto);

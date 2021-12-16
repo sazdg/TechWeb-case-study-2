@@ -20,7 +20,7 @@ if($risultato){
             "nome" => $row["nome"],
             "descrizione" => $row["descrizione"],
             "prezzo" => $row["prezzo"],
-            "categoria" => $row["cat_id"]
+            "categoria" => $row["nomecat"]
         );
         array_push($risultati_ricerche["ris"], $p);
     }

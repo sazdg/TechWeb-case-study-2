@@ -42,7 +42,7 @@ class Prodotto {
 
     //servizio di lettura di tutti i prodotti - chiamata ajax
     public function read(){
-        $query = "SELECT * FROM prodotti";
+        $query = "SELECT * FROM prodotti INNER JOIN categorie ON prodotti.cat_id = categorie.idcat";
 
         //preparare ed eseguire
         $stmt = $this->conn->prepare($query);
@@ -53,7 +53,7 @@ class Prodotto {
     }
 
     public function readOne(){
-        $x = "SELECT * FROM prodotti WHERE id = ?";
+        $x = "SELECT * FROM prodotti INNER JOIN categorie ON prodotti.cat_id = categorie.idcat WHERE id = ?";
         $result = $this->conn->prepare($x);
         $result->bindParam(1, $this->id);
         $result->execute();
@@ -61,13 +61,18 @@ class Prodotto {
         return $result;
     }
 
+    //servizio di ricerca prodotti per keyword
     public function search(){
-        $z = "SELECT * FROM prodotti WHERE nome LIKE :n OR descrizione LIKE :d";
+        $z = "SELECT * FROM prodotti INNER JOIN categorie ON prodotti.cat_id = categorie.idcat WHERE nome LIKE :n OR descrizione LIKE :d ORDER BY prodotti.nome ASC";
+
         $records = $this->conn->prepare($z);
+
+        $this->name = htmlspecialchars($this->name);
+
         $records->execute([
             "n" => "%" . $this->name . "%",
-            "d" => "%" . $this->description . "%",
-            //%parola%
+            "d" => "%" . $this->description . "%"
+            //stessa parla in entrambi %parola% 
         ]);
 
         return $records;
@@ -78,6 +83,12 @@ class Prodotto {
     public function create($prod, $desc, $prezzo, $cat_id){
         //query per l'id
         $temp = $this->conn->query("SELECT id FROM prodotti ORDER BY id DESC LIMIT 1");
+
+        //sanificare i dati 
+        $prod = htmlspecialchars($prod);
+        $desc = htmlspecialchars($desc);
+        $prezzo = htmlspecialchars($prezzo);
+        
 
         //calcolo id automatico
         while($result = $temp->fetch(PDO::FETCH_ASSOC)){
@@ -93,7 +104,7 @@ class Prodotto {
                 "item" => $prod,
                 "descrizione" => $desc,
                 "prezzo" => $prezzo,
-                "cat_id" => $cat_id,
+                "cat_id" => $cat_id
             ]);
             //MANCA sanificare i dati
             return $query;
@@ -106,6 +117,11 @@ class Prodotto {
         $q = "UPDATE prodotti SET nome = :nominat, descrizione = :descr, prezzo = :pr, cat_id = :cat WHERE id = :num";
         $zzz = $this->conn->prepare($q);
 
+        //sanificare i dati 
+        $nominativo = htmlspecialchars($nominativo);
+        $descr = htmlspecialchars($descr);
+        $prezzzo = htmlspecialchars($prezzzo);
+
         $zzz->execute([
             "num" => $num,
             "nominat" => $nominativo,
@@ -116,6 +132,7 @@ class Prodotto {
 
         return $zzz;
     }
+
     //servizio di cancellazione di un prodotto 
     public function delete(){
         $query = "DELETE FROM prodotti where ID = ?";
@@ -127,6 +144,5 @@ class Prodotto {
 
         return $stmt;
     }
-    //servizio di ricerca prodotti per keyword
 }
 ?>
